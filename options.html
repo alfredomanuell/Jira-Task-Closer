@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Jira Task Closer - Opções</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <h1>Configuração do Jira</h1>
+
+  <form id="form">
+    <label for="baseUrl">URL do Jira</label>
+    <input id="baseUrl" type="url" value="https://rcsangola.atlassian.net" required>
+
+    <label for="email">E-mail da conta Atlassian</label>
+    <input id="email" type="email" value="alfredo.chivela@rcsangola.com" required>
+
+    <label for="token">API token</label>
+    <input id="token" type="password" required>
+    <div class="hint">
+      Cria um token em
+      <a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank" rel="noopener">id.atlassian.com &rarr; Security &rarr; API tokens</a>.
+    </div>
+
+    <label for="jql">Filtro JQL extra (opcional)</label>
+    <textarea id="jql" rows="2" placeholder="project in (DEVV, DMPDC) ORDER BY updated DESC"></textarea>
+    <div class="hint">Combinado com AND a <code>assignee = tu</code> e <code>statusCategory != Done</code>.</div>
+
+    <h2>Fecho automático</h2>
+    <label class="check">
+      <input id="autoClose" type="checkbox">
+      Passar tarefas de <em>Em Progresso</em> para <em>Concluído</em> automaticamente
+    </label>
+    <label for="autoCloseMinutes">Fechar quando faltarem (minutos) do Tempo Estimado</label>
+    <input id="autoCloseMinutes" type="number" min="0" max="240" step="1" value="5">
+    <div class="hint">
+      Tempo decorrido = tempo já registado + tempo desde que entrou em <em>Em Progresso</em>.
+      Verificado a cada minuto enquanto o Chrome estiver aberto. Tarefas sem Tempo Estimado são ignoradas.
+    </div>
+
+    <div class="row">
+      <button type="button" id="test">Testar ligação</button>
+      <button type="submit" class="primary">Guardar</button>
+    </div>
+  </form>
+
+  <div id="message" class="message" hidden></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
