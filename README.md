@@ -12,7 +12,7 @@ O token fica só no `chrome.storage`, nunca no código.
 
 ## Como funciona
 
-- Lista tarefas com `assignee = eu AND statusCategory != Done`, mais o filtro JQL extra das opções.
+- Lista tarefas com `assignee = eu AND statusCategory != Done AND duedate = hoje` (calendário de Europe/Lisbon), mais o filtro JQL extra das opções. Tarefas de outros dias ficam de fora da lista, do fecho automático e do arranque da seguinte.
 - **Fechar** aplica a transição para um estado da categoria Done (Concluído). Clique direito no botão para escolher outra transição.
 - Numa página `/browse/ABC-123` a tarefa dessa página aparece no topo.
 - Só toca em tarefas atribuídas à conta do token; qualquer outra é recusada.
@@ -27,7 +27,7 @@ Com a opção ligada, a cada minuto (Chrome aberto) verifica as tarefas em Em Pr
 estimado - (tempo registado + tempo útil desde que entrou em Em Progresso) <= N minutos
 ```
 
-Quando isso acontece, passa a tarefa para Concluído. Se depois dela ainda houver uma tarefa por fazer e nenhuma estiver em progresso, essa seguinte passa a Em Progresso, para não ficar um buraco no horário. A ordem é a da lista (o JQL). O mesmo encadeamento acontece ao fechar uma tarefa à mão, mas só dentro do horário útil.
+Quando isso acontece, passa a tarefa para Concluído. Se depois dela ainda houver uma tarefa de hoje por fazer e nenhuma estiver em progresso, essa seguinte passa a Em Progresso, para não ficar um buraco no horário. A ordem é a da lista (o JQL). O mesmo encadeamento acontece ao fechar uma tarefa à mão, mas só dentro do horário útil.
 
 As últimas 50 ações ficam em `chrome.storage.local.autoCloseLog`. Não corre com o PC suspenso ou hibernado; ao acordar fecha o que já tiver passado do tempo e, se for horário útil, arranca a seguinte.
 
