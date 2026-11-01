@@ -1,0 +1,12 @@
+{
+  "name": "jira-task-closer",
+  "version": "1.0.0",
+  "description": "Extensão Chrome para fechar tarefas do Jira com um clique",
+  "private": true,
+  "scripts": {
+    "icons": "node scripts/make-icons.js",
+    "build": "npm run icons && node scripts/zip.js",
+    "check": "node --check src/background.js && node --check src/jira.js && node --check src/time.js && node --check src/popup.js && node --check src/options.js"
+  },
+  "license": "MIT"
+}
