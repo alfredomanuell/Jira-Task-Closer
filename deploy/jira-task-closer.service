@@ -1,0 +1,30 @@
+[Unit]
+Description=Jira Task Closer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jira-closer
+WorkingDirectory=/opt/jira-task-closer
+EnvironmentFile=/opt/jira-task-closer/.env
+ExecStart=/usr/bin/node src/index.js
+Restart=on-failure
+RestartSec=10
+RestartPreventExitStatus=78
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+LockPersonality=true
+ReadOnlyPaths=/opt/jira-task-closer
+ReadWritePaths=/opt/jira-task-closer/data
+
+[Install]
+WantedBy=multi-user.target
